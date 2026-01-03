@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="A Ph.D. candidate at Virginia Tech, interested in quantum information theory and online learning. See within for a list of preprints and publications.">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="{{ name }}">
+	<title>{{ name }}</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<img class="profile" src="images/profile400.jpg" alt="Profile picture" height="200">
+		<div>
+			<h1>{{ name }}</h1>
+			email: <span class="class">al<span>ice</span>zh<!--ou-->eng&#64;<span>mail&#46;</span>v<script>document.write('t'+'&'+'#'+'4'+'6'+';'+'e');</script>du</span>
+		</div>
+	</header>
+{% include 'bio.html' %}
+	<h2>Preprints and Publications (see also
+	{%- for icon in icons %}
+		<a href="{{ icon[2] }}" class="icon" title="{{ icon[0] }}">
+			<img class="icon-color" src="icons/{{ icon[1] }}.svg" alt="{{ icon[0] }}">
+			<img class="icon-mono" src="icons/{{ icon[1] }}-invert.svg">
+		</a>
+	{%- endfor -%}
+	)</h2>
+{% include 'ref.html' %}
+	<footer>
+		<span class="note">
+			Last updated {{ date }}.
+			[<a href="https://github.com/zheng-alice/zheng-alice.github.io">Source</a>]
+		</span>
+	</footer>
+</body>
+</html>

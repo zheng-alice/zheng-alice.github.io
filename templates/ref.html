@@ -1,0 +1,118 @@
+<ol>
+{%- set ns = namespace (indent = [], count = 1) %}
+{%- for entry in lib %}
+	<li value={{ ns.count }}>
+		<cite>{{ entry.title }}</cite>.
+	{%- if 'editor' in entry %}
+		{%- set _ = entry.editor.append('editors' if (entry.editor | length) > 1 else 'editor') %}
+	{%- endif %}
+	{%- if 'author' in entry %}
+		{{ entry.author | join(', ') }}.
+	{%- else %}
+		{{ entry.editor | join(', ') }}.
+		{%- set _ = entry.pop('editor') %}
+	{%- endif %}
+
+	{#- Reference -- examples include:
+		journal, volume(number):pages
+		howpublished
+		organization, address
+		In booktitle, vol. volume of series, editor, ed/eds, p/pp pages, publisher, address
+		Master's/PhD thesis, school, address
+		Technical Report number, institution
+	#}
+	{%- set ref = [] %}
+	{%- set special = {
+		'mastersthesis': "Master's thesis",
+		'phdthesis': "PhD thesis",
+		'techreport': "Technical Report " ~ entry.number
+	} %}
+	{%- if entry.ENTRYTYPE in special %}
+		{%- set _ = ref.append(special[entry.ENTRYTYPE]) %}
+	{%- endif %}
+	{%- for field in ['booktitle', 'journal', 'howpublished'] %}
+		{%- if field in entry %}
+			{%- set _ = ref.append(entry[field]) %}
+		{%- endif %}
+	{%- endfor %}
+	{%- if 'series' in entry %}
+		{%- set ser = entry.series %}
+		{%- if 'volume' in entry %}
+			{%- set ser = ("volume " if ref else "Volume ") ~ entry.volume ~ " of " + ser %}
+			{%- set _ = entry.pop('volume') %}
+		{%- endif %}	
+		{%- set _ = ref.append(ser) %}
+	{%- endif %}
+	{%- if 'editor' in entry %}
+		{%- set _ = ref.append(entry.editor | join(', ')) %}
+	{%- endif %}
+	{%- set nums = '' %}
+	{%- if 'volume' in entry %}
+		{%- set nums = nums ~ entry.volume %}
+	{%- endif %}
+	{%- if 'number' in entry %}
+		{%- set nums = nums + "(" ~ entry.number ~ ")" %}
+	{%- endif %}
+	{%- if 'pages' in entry %}
+		{%- set nums = nums + (":" if nums else ("pages " if '–' in entry.pages else "page ")) ~ entry.pages %}
+	{%- endif %}
+	{%- if nums %}
+		{%- set _ = ref.append(nums) %}
+	{%- endif %}
+	{%- for field in ['organization', 'publisher', 'school', 'institution', 'address'] %}
+		{%- if field in entry %}
+			{%- set _ = ref.append(entry[field]) %}
+		{%- endif %}
+	{%- endfor %}
+	{%- set ref = ref | join(', ') %}
+	{%- if ref %}
+		{% if 'booktitle' in entry %}In {% endif %}
+		{%- if 'doi' in entry -%}
+		<a href="https://doi.org/{{ entry.doi }}">{{ ref }}</a>,
+		{%- else -%}
+		{{ ref }},
+		{%- endif %}
+	{%- endif %}
+		{% if 'month' in entry %}{{ entry.month }} {% endif -%}
+		{{ entry.year }}.
+
+	{#- Links to additional material #}
+	{%- set links = [] %}
+	{%- if 'eprint' in entry %}
+		{%- if 'archiveprefix' not in entry %}
+			{%- set _ = entry.__setitem__('archiveprefix', 'arXiv') %}
+		{%- endif %}
+		{%- set link = "https://arxiv.org/abs/" ~ ((entry.archiveprefix + "/") if (entry.archiveprefix != 'arXiv') else "") ~ entry.eprint %}
+		{%- set text = entry.archiveprefix + ":" ~ entry.eprint %}
+		{%- set _ = links.append('<a href="' + link + '">' + text + '</a>') %}
+	{%- endif %}
+	{%- if 'talk' in entry %}
+		{%- set _ = links.append('<a href="talks/' + entry.ID + '-' + entry.talk + '.pdf">Talk</a>') %}
+	{%- endif %}
+	{%- if 'poster' in entry %}
+		{%- set _ = links.append('<a href="posters/' + entry.ID + '-' + entry.poster + '.pdf">Poster</a>') %}
+	{%- endif %}
+	{%- if links %}
+		[{{ links | join('|') }}]
+	{%- endif %}
+
+	{#- Nest entries via the 'parentof' field #}
+	{%- if 'note' in entry %}
+		<span class="note">{{ entry.note }}</span>
+	{%- endif %}
+	</li>
+	{%- if ns.indent %}
+		{%- set last = ns.indent.pop() - 1 %}
+		{%- if last == 0 %}
+</ol>
+		{%- else %}
+			{%- set _ = ns.indent.append(last) %}
+		{%- endif %}
+	{%- endif %}
+	{%- if 'parentof' in entry %}
+		{%- set _ = ns.indent.append(entry.parentof | int) %}
+<ol>
+	{%- endif %}
+	{%- set ns.count = ns.count + 1 %}
+{%- endfor %}
+</ol>
