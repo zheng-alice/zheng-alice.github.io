@@ -40,7 +40,7 @@
 		{%- if 'volume' in entry %}
 			{%- set ser = ("volume " if ref else "Volume ") ~ entry.volume ~ " of " + ser %}
 			{%- set _ = entry.pop('volume') %}
-		{%- endif %}	
+		{%- endif %}
 		{%- set _ = ref.append(ser) %}
 	{%- endif %}
 	{%- if 'editor' in entry %}

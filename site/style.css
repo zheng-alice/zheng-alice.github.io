@@ -77,7 +77,7 @@ img.profile {
 		padding: 0;
 		padding-top: .2em;
 	}
-	
+
 	img.profile {
 		height: 125px;
 	}
@@ -90,7 +90,7 @@ img.profile {
 }
 
 a {
-	color: #000fa0;
+	color: #005fb3;
 }
 
 a:not(:hover) {
@@ -108,7 +108,7 @@ ol > li {
 }
 
 span.note {
-	color: #404040;
+	color: #555;
 }
 
 span.class > span:nth-child(2) {

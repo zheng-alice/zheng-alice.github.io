@@ -1,0 +1,29 @@
+\documentclass{standalone}
+\usepackage{graphicx}
+\usepackage{ifthen}
+\usepackage{palatino}
+\begin{document}
+\message{JOBNAME:\jobname:}
+\ifthenelse{\equal{\jobname}{\detokenize{favicon}}}{
+	\special{dvisvgm:raw
+	<style>
+	g > g {
+		color: black;
+	}
+	@media (prefers-color-scheme: dark) {
+		g > g {
+			color: aliceblue;
+		}
+	}
+	</style>}
+}{
+	\special{dvisvgm:raw
+	<style>
+	g > g {
+		color: gray;
+	}
+	</style>}
+}
+\special{dvisvgm:currentcolor}
+\scalebox{1}[1.25]{\Large\textbf{AZ}}
+\end{document}
