@@ -2,18 +2,47 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="description" content="A Ph.D. candidate at Virginia Tech, interested in quantum information theory and online learning. See within for a list of preprints and publications.">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="author" content="{{ name }}">
-	<meta name="theme-color" content="aliceblue">
 	<title>{{ name }}</title>
 	<link rel="stylesheet" href="style.css">
 	<link rel="icon" href="icons/favicon.svg" sizes="any" type="image/svg+xml">
 	<link rel="mask-icon" href="icons/favicon.svg" color="#005fb3">
+	<link rel="canonical" href="{{ base }}">
+	<meta name="author" content="{{ name }}">
+	<meta name="description" content="A Ph.D. candidate at Virginia Tech, interested in quantum information theory and online learning. See within for a list of preprints and publications.">
+	<meta name="theme-color" content="#e0f1ff">
+	<meta property="og:title" content="{{ name }}'s Homepage">
+	<meta property="og:image" content="{{ base }}/images/profile400.jpg">
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "ProfilePage",
+		"dateModified": "{{ datetime_iso }}",
+		"mainEntity": {
+			"@id": "/#alice-zheng",
+			"@type": "Person",
+			"name": "{{ name }}",
+			"url": "{{ base }}",
+			"image": "/images/profile400.jpg",
+			"sameAs": [
+			{%- for icon in icons %}
+				"{{ icon[2] }}"{% if not loop.last %},{% endif %}
+			{%- endfor %}
+			],
+			"description": "{{ name }} is a Ph.D. candidate at Virginia Tech, working at the intersection of quantum and learning theory.",
+			"affiliation": {
+				"@type": "CollegeOrUniversity",
+				"name": "Virginia Tech",
+				"url": "https://www.vt.edu",
+				"sameAs": "https://en.wikipedia.org/wiki/Virginia_Tech"
+			}
+		}
+	}
+	</script>
 </head>
 <body>
 	<header>
-		<img class="profile" src="images/profile400.jpg" alt="Profile picture" height="200">
+		<img class="profile" src="images/profile400.jpg" alt="{{ name }}'s profile picture" height="200">
 		<div>
 			<h1>{{ name }}</h1>
 			email: <span class="class">al<span>ice</span>zh<!--ou-->eng&#64;<span>mail&#46;</span>v<script>document.write('t'+'&'+'#'+'4'+'6'+';'+'e');</script>du</span>
@@ -32,7 +61,7 @@
 	<footer>
 		<span class="note">
 			Last updated {{ date }}.
-			[<a href="https://github.com/zheng-alice/zheng-alice.github.io">Source</a>]
+			[<a href="{{ source }}">Source</a>]
 		</span>
 	</footer>
 	<script src="script.js" defer></script>

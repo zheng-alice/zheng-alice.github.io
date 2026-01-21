@@ -1,5 +1,5 @@
 import re
-from datetime import date
+from datetime import date, datetime
 import bibtexparser
 from bibtexparser.bparser import BibTexParser
 from bibtexparser.customization import *
@@ -36,15 +36,19 @@ parser.customization = customizations
 with open('publications.bib', 'r') as f:
     lib = bibtexparser.load(f, parser=parser)
 
+uname = 'zheng-alice'
 env = Environment(loader=FileSystemLoader('templates'))
 html = env.get_template('index.html').render({
     'name': 'Alice Zheng',
+    'base': f'https://{uname}.github.io',
+    'source': f'https://github.com/{uname}/{uname}.github.io',
     'lib': lib.entries,
     'icons': [
         ["Google Scholar", 'scholar', "https://scholar.google.com/citations?user=xQbR0vcAAAAJ"],
         ["arXiv", 'arxiv', "https://arxiv.org/a/zheng_a_1.html"],
         ["ORCID", 'orcid', "https://orcid.org/0009-0009-9470-4941"]
     ],
+    'datetime_iso': datetime.now().astimezone().isoformat(timespec='seconds'),
     'date': date.today().strftime("%B %d, %Y")
 })
 with open('site/index.html', 'w') as fout:
