@@ -1,3 +1,4 @@
+# Fill in details in site template (citations, date, etc.)
 import re
 from datetime import date, datetime
 import bibtexparser
@@ -37,7 +38,7 @@ with open('publications.bib', 'r') as f:
     lib = bibtexparser.load(f, parser=parser)
 
 uname = 'zheng-alice'
-env = Environment(loader=FileSystemLoader('templates'))
+env = Environment(loader=FileSystemLoader('templates'),extensions=['jinja2.ext.loopcontrols'])
 html = env.get_template('index.html').render({
     'name': 'Alice Zheng',
     'base': f'https://{uname}.github.io',

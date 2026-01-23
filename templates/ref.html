@@ -1,7 +1,7 @@
 <ol>
 {%- set ns = namespace (indent = [], count = 1) %}
 {%- for entry in lib %}
-	<li value={{ ns.count }}>
+	<li value="{{ ns.count }}">
 		<cite>{{ entry.title }}</cite>.
 	{%- if 'editor' in entry %}
 		{%- set _ = entry.editor.append('editors' if (entry.editor | length) > 1 else 'editor') %}
@@ -100,19 +100,23 @@
 	{%- if 'note' in entry %}
 		<span class="note">{{ entry.note }}</span>
 	{%- endif %}
-	</li>
 	{%- if ns.indent %}
-		{%- set last = ns.indent.pop() - 1 %}
-		{%- if last == 0 %}
-</ol>
-		{%- else %}
-			{%- set _ = ns.indent.append(last) %}
-		{%- endif %}
+		{%- set _ = ns.indent.append(ns.indent.pop() - 1) %}
 	{%- endif %}
 	{%- if 'parentof' in entry %}
 		{%- set _ = ns.indent.append(entry.parentof | int) %}
 <ol>
+	{%- else %}
+	</li>
 	{%- endif %}
+	{%- for _ in range(999) %}
+		{%- if not ns.indent or ns.indent|last > 0 %}
+			{%- break %}
+		{%- endif %}
+		{%- set _ = ns.indent.pop() %}
+</ol>
+	</li>
+	{%- endfor %}
 	{%- set ns.count = ns.count + 1 %}
 {%- endfor %}
 </ol>

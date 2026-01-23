@@ -18,13 +18,24 @@ jobs:
           python-version: '3.10'
           cache: 'pip'
 
-      - name: Set up dependencies
+      - name: Set up Python dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
 
       - name: Build static files
         run: python parse.py
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '25'
+
+      - name: Set up Node.js dependencies
+        run: npm i -g subfont
+
+      - name: Subset fonts
+        run: python fonts.py
 
       - name: Upload artifacts
         id: deployment

@@ -1,2 +1,4 @@
 bibtexparser<2.0.0
 Jinja2
+fonttools
+brotli

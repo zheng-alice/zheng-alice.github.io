@@ -1,8 +1,9 @@
 # Build artifacts
 site/index.html
+site/fonts
 
 # Unused files
-site/images/profile.jpg
-site/fonts/palladiourw_bolita.woff2
+templates/images
+templates/fonts/palladiourw_bolita.woff2
 site/posters/zheng2026unambiguous-*.pdf
 site/talks/zheng2026unambiguous-*.pdf

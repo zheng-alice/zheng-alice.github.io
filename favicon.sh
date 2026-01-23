@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Generate svg favicon from standalone latex document
 for jobname in favicon favicon-inactive; do
 	latex -jobname $jobname favicon.tex
 	svg="site/icons/$jobname.svg"
