@@ -56,10 +56,10 @@ header {
 img.profile {
 	display: block;
 	object-fit: contain;
-	border: 1px solid #ccc;
+	border: 1.5px solid #cad9e6;
 	border-radius: 4px;
 	padding: 5px;
-	background-color: #eee;
+	background-color: #e0f1ff;
 }
 
 @media screen and (max-width: 739px) {
