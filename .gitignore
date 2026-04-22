@@ -1,5 +1,6 @@
 # Build artifacts
 site/index.html
+site/sitemap.xml
 site/fonts
 
 # Unused files
