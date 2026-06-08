@@ -53,7 +53,8 @@ html = env.get_template('index.html').render({
     'icons': [
         ["Google Scholar", 'scholar', "https://scholar.google.com/citations?user=xQbR0vcAAAAJ"],
         ["arXiv", 'arxiv', "https://arxiv.org/a/zheng_a_1.html"],
-        ["ORCID", 'orcid', "https://orcid.org/0009-0009-9470-4941"]
+        ["ORCID", 'orcid', "https://orcid.org/0009-0009-9470-4941"],
+        ["dblp", 'dblp', "https://dblp.org/pid/57/9226-1.html"]
     ],
     'datetime_iso': now,
     'date': date.today().strftime("%B %d, %Y")

@@ -7,7 +7,7 @@ Generated using the [BibtexParser](https://bibtexparser.readthedocs.io) and [Jin
 
 Palladio URW font by (URW)++ Design & Development.
 Fonts subset using [subfont](https://github.com/Munter/subfont) and [fontTools](https://fonttools.readthedocs.io).
-Rights for the icons of Google Scholar, arXiv, and ORCID go to their respective owners.
+Rights for the icons of Google Scholar, arXiv, ORCID, and dblp go to their respective owners.
 
 ## Scripts
 

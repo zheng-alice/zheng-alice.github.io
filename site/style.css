@@ -91,7 +91,7 @@ img.profile {
 	}
 }
 
-@media (min-width: 220px) {
+@media (min-width: 242px) {
 	span.nobr {
 		white-space: nowrap;
 	}

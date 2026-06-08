@@ -25,19 +25,24 @@
 	{
 		"@context": "https://schema.org",
 		"@type": "ProfilePage",
+		"url": "{{ base }}",
 		"dateModified": "{{ datetime_iso }}",
 		"mainEntity": {
 			"@id": "#alice-zheng",
 			"@type": "Person",
 			"name": "{{ name }}",
 			"url": "{{ base }}",
-			"image": "images/profile800.webp",
+			"image": [
+				"images/profile800.webp",
+				"images/landscape675.webp"
+			],
 			"sameAs": [
 			{%- for icon in icons %}
 				"{{ icon[2] }}"{% if not loop.last %},{% endif %}
 			{%- endfor %}
 			],
-			"description": "{{ name }} is a Ph.D. candidate at Virginia Tech, working at the intersection of quantum and learning theory.",
+			"jobTitle": "Ph.D. candidate",
+			"description": "{{ name }} is a Ph.D. candidate at Virginia Tech, researching quantum information and learning theory.",
 			"affiliation": {
 				"@type": "CollegeOrUniversity",
 				"name": "Virginia Tech",

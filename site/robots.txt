@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zheng-alice.github.io/sitemap.xml
