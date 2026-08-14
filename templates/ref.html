@@ -69,6 +69,8 @@
 		{% if 'booktitle' in entry %}In {% endif %}
 		{%- if 'doi' in entry -%}
 		<a href="https://doi.org/{{ entry.doi }}">{{ ref }}</a>,
+		{%- elif 'url' in entry -%}
+		<a href="{{ entry.url }}">{{ ref }}</a>,
 		{%- else -%}
 		{{ ref }},
 		{%- endif %}
