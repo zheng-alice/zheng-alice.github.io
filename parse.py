@@ -42,13 +42,15 @@ with open('publications.bib', 'r') as f:
     lib = bibtexparser.load(f, parser=parser)
 
 uname = 'zheng-alice'
-base = f'https://{uname}.github.io'
+url = f'{uname}.github.io'
+base = f'https://{url}'
 now = datetime.now().astimezone().isoformat(timespec='seconds')
 env = Environment(loader=FileSystemLoader('templates'),extensions=['jinja2.ext.loopcontrols'])
 html = env.get_template('index.html').render({
     'name': 'Alice Zheng',
+    'url': url,
     'base': base,
-    'source': f'https://github.com/{uname}/{uname}.github.io',
+    'source': f'https://github.com/{uname}/{url}',
     'lib': lib.entries,
     'icons': [
         ["Google Scholar", 'scholar', "https://scholar.google.com/citations?user=xQbR0vcAAAAJ"],
@@ -86,6 +88,21 @@ for loc in ['talks', 'posters']:
         cmd = ['git', 'log', '-1', '--format=%aI', f'site/{loc}/{file}']
         mod = subprocess.run(cmd, check=True, text=True, capture_output=True).stdout.strip()
         add_url(f'{base}/{loc}/{file}', mod, 'never', '0.4')
+filename = re.compile(r"^(.*?)-(\d+)\.pdf$")
+for loc in ['notes']:
+    files = defaultdict(int)
+    for file in os.listdir(f'site/{loc}'):
+        res = filename.match(file)
+        if res is None: continue
+        name, date = res.groups()
+        files[name] = max(files[name], int(date))
+    for name, date in files.items():
+        file = f'{name}-{date:06}.pdf'
+        latest = f'{name}.pdf'
+        cmd = ['git', 'log', '-1', '--format=%aI', f'site/{loc}/{file}']
+        mod = subprocess.run(cmd, check=True, text=True, capture_output=True).stdout.strip()
+        add_url(f'{base}/{loc}/{latest}', mod, 'monthly', '0.9')
+        subprocess.run(['cp', f'site/{loc}/{file}', f'site/{loc}/{latest}'], check=True)
 
 tree = ET.ElementTree(sitemap)
 ET.indent(tree, space="\t", level=0)

@@ -10,11 +10,12 @@
 	<link rel="preload" href="fonts/palladiourw_regita.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="icon" href="icons/favicon.svg" sizes="any" type="image/svg+xml">
 	<link rel="mask-icon" href="icons/favicon.svg" color="#005fb3">
-	<link rel="canonical" href="{{ base }}">
+	<link rel="canonical" href="{{ base }}/">
 	<meta name="author" content="{{ name }}">
 	<meta name="description" content="A Ph.D. candidate at Virginia Tech, interested in quantum information theory and online learning. See within for a list of preprints and publications.">
 	<meta name="theme-color" content="#e0f1ff">
-	<meta property="og:title" content="{{ name }}'s Homepage">
+	<meta property="og:title" content="{{ name }}">
+	<meta property="og:site_name" content="{{ name }}">
 	<meta property="og:image" content="{{ base }}/images/profile800.webp">
 	<meta property="og:image:width" content="740">
 	<meta property="og:image:height" content="800">
@@ -25,13 +26,23 @@
 	{
 		"@context": "https://schema.org",
 		"@type": "ProfilePage",
-		"url": "{{ base }}",
+		"url": "{{ base }}/",
 		"dateModified": "{{ datetime_iso }}",
-		"mainEntity": {
-			"@id": "#alice-zheng",
-			"@type": "Person",
+		"isPartOf": {
+			"@type": "WebSite",
+			"@id": "{{ base }}/#website",
+			"url": "{{ base }}/",
 			"name": "{{ name }}",
-			"url": "{{ base }}",
+			"alternateName": [
+				"{{ name }}'s Homepage",
+				"{{ url }}"
+			]
+		},
+		"mainEntity": {
+			"@type": "Person",
+			"@id": "{{ base }}/#alice-zheng",
+			"url": "{{ base }}/",
+			"name": "{{ name }}",
 			"image": [
 				"images/profile800.webp",
 				"images/landscape675.webp"
@@ -69,6 +80,13 @@
 	</header>
 	<main role="main">
 {% include 'bio.html' %}
+	<h2>Resources</h2>
+	<ul>
+		<li id="QISP">
+			<cite><a href="notes/QISP.pdf">Quantum Information & Semidefinite Programming</a></cite>.
+			Jamie Sikora. Alice Zheng, editor.
+		</li>
+	</ul>
 	<h2>Preprints and Publications <span class="nobr">(see also
 	{%- for icon in icons %}
 		<a href="{{ icon[2] }}" class="icon" title="{{ icon[0] }}">
