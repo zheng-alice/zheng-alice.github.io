@@ -12,7 +12,7 @@
 	<link rel="mask-icon" href="icons/favicon.svg" color="#005fb3">
 	<link rel="canonical" href="{{ base }}/">
 	<meta name="author" content="{{ name }}">
-	<meta name="description" content="A Ph.D. candidate at Virginia Tech, interested in quantum information theory and online learning. See within for a list of preprints and publications.">
+	<meta name="description" content="A postdoc at NIST/QuICS, interested in quantum information theory, online learning, and quantum cryptography. See within for a list of preprints and publications.">
 	<meta name="theme-color" content="#e0f1ff">
 	<meta property="og:title" content="{{ name }}">
 	<meta property="og:site_name" content="{{ name }}">
@@ -52,9 +52,22 @@
 				"{{ icon[2] }}"{% if not loop.last %},{% endif %}
 			{%- endfor %}
 			],
-			"jobTitle": "Ph.D. candidate",
-			"description": "{{ name }} is a Ph.D. candidate at Virginia Tech, researching quantum information and learning theory.",
-			"affiliation": {
+			"jobTitle": "NRC postdoc",
+			"description": "{{ name }} is a postdoc at NIST/QuICS, interested in quantum information and learning theory.",
+			"affiliation": [
+				{
+					"@type": "GovernmentOrganization",
+					"name": "National Institute of Standards and Technology (NIST)",
+					"url": "https://www.nist.gov",
+					"sameAs": "https://en.wikipedia.org/wiki/National_Institute_of_Standards_and_Technology"
+				},
+				{
+					"@type": "Cooperative",
+					"name": "Joint Center for Quantum Information and Computer Science (QuICS)",
+					"url": "https://quics.umd.edu"
+				}
+			],
+			"alumniOf": {
 				"@type": "CollegeOrUniversity",
 				"name": "Virginia Tech",
 				"url": "https://www.vt.edu",
@@ -75,7 +88,7 @@
 		</picture>
 		<div>
 			<h1>{{ name }}</h1>
-			email: <span class="class">al<span>ice</span>zh<!--ou-->eng&#64;<span>mail&#46;</span>v<script>document.write('t'+'&'+'#'+'4'+'6'+';'+'e');</script>du</span>
+			email: <span class="class">a<span>li</span>c<!--ia-->ez&#64;<span>mail&#46;</span>u<script>document.write('m'+'d'+'&'+'#'+'4'+'6'+';'+'e');</script>du</span>
 		</div>
 	</header>
 	<main role="main">

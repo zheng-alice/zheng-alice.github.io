@@ -34,7 +34,7 @@ jobs:
           node-version: '22'
 
       - name: Set up Node.js dependencies
-        run: npm i -g subfont
+        run: npm i -g subfont@7.2.3
 
       - name: Subset fonts
         run: python fonts.py

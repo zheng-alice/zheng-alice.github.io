@@ -12,7 +12,7 @@ and another to subset, using this script to pass intermediate data.'''
 
 # 1. subfont: Search website and generate lists of used characters
 shutil.copytree("templates/fonts", "site/fonts", dirs_exist_ok=True)
-cmd = ['subfont', '--debug', '--dry-run', 'site/index.html']
+cmd = ['subfont', '--debug', '--dry-run', '--root=site', 'site/index.html']
 out = subprocess.run(cmd, check=True, text=True, stdout=subprocess.PIPE).stdout
 shutil.rmtree("site/fonts")
 
